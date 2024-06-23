@@ -2,7 +2,6 @@ django
 djangorestframework
 requests
 djangorestframework-simplejwt
-PyJWT
 django-cors-headers
 psycopg2
 sqlparse
@@ -11,3 +10,4 @@ matplotlib
 pandas
 scipy
 fastprogress
+timedelta
