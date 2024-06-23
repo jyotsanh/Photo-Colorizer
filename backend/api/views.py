@@ -7,7 +7,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework import status
 from rest_framework.exceptions import AuthenticationFailed
 from django.contrib.auth import authenticate
-
+from django.conf import settings
 
 from .serializers import (
     UserRegistrationSerializer, 
@@ -45,18 +45,20 @@ class RegisterView(APIView):
             {"msg": "Registration successful"},
             status=status.HTTP_201_CREATED,
         )
+        is_production = not settings.DEBUG
+
         response.set_cookie(
             key='refresh_token',
             value=tokens['refresh'],
             httponly=True,
-            secure=True,
+            secure=is_production,  # Set secure only in production
             samesite='Strict'
         )
         response.set_cookie(
             key='access_token',
             value=tokens['access'],
             httponly=True,
-            secure=True,
+            secure=is_production,  # Set secure only in production
             samesite='Strict'
         )
         return response
