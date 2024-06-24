@@ -1,35 +1,30 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import Register from './components/Register';
+import Login from './components/Log-in';
+import Profile from './components/Profile';
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [accessToken, setAccessToken] = useState('');
+
+  const handleLogin = (response) => {
+    setAccessToken(response.access_token);  // Store the access token
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="App">
+      <h1>Register</h1>
+      <Register />
+      <h1>Login</h1>
+      <Login onLogin={handleLogin} />
+      {accessToken && (
+        <>
+          <h1>Profile</h1>
+          <Profile accessToken={accessToken} />
+        </>
+      )}
+    </div>
+  );
+};
 
 export default App
