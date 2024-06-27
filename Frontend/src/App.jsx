@@ -1,30 +1,19 @@
-import { useState } from 'react'
-import Register from './components/Register';
-import Login from './components/Log-in';
-import Profile from './components/Profile';
-import './App.css'
+import ConditionalRoute from "./routes/conditionalRouting";
+import { Routes, Route } from "react-router-dom";
+import NavBar from "./components/navbar/navbar.jsx";
+import Footer from "./components/footer/footer.jsx";
 
-const App = () => {
-  const [accessToken, setAccessToken] = useState('');
 
-  const handleLogin = (response) => {
-    setAccessToken(response.access_token);  // Store the access token
-  };
-
+function App(){
   return (
-    <div className="App">
-      <h1>Register</h1>
-      <Register />
-      <h1>Login</h1>
-      <Login onLogin={handleLogin} />
-      {accessToken && (
-        <>
-          <h1>Profile</h1>
-          <Profile accessToken={accessToken} />
-        </>
-      )}
-    </div>
+    <>
+      <NavBar />
+      <Routes>
+        <Route path='/*' element={<ConditionalRoute />} />
+      </Routes>
+      <Footer/>
+    </>
   );
 };
 
-export default App
+export default App;

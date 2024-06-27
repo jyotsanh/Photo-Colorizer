@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import { registerUser } from '../services/api';
 
-const Register = () => {
+function Register(){
+    
     const [formData, setFormData] = useState({
         email: '',
         username: '',
@@ -12,19 +13,6 @@ const Register = () => {
         password2: '',
     });
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await registerUser(formData);
-            console.log('Registration successful', response);
-        } catch (error) {
-            console.error('Error registering user', error);
-        }
-    };
 
     return (
         <form onSubmit={handleSubmit}>
