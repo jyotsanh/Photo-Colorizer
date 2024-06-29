@@ -8,11 +8,17 @@ from rest_framework import status
 from rest_framework.exceptions import AuthenticationFailed
 from django.contrib.auth import authenticate
 from django.conf import settings
+from PIL import Image
+import io
+from .utility import Converter
+
+obj  = Converter()
 
 from .serializers import (
     UserRegistrationSerializer, 
     UserLoginSerializer, 
     UserProfileSerializer, 
+    ImageUploadSerializer
 ) # all the serializers class from serialzers.py
 from api.renderers import CustomJSONRenderer
 
@@ -35,33 +41,23 @@ class RegisterView(APIView):
     def post(self, request):
         # Create a serializer object with the user registration data
         serializer = UserRegistrationSerializer(data=request.data)
+        print(request.data)
         # Check if the data is valid and raise an exception if not
-        serializer.is_valid(raise_exception=True)
+        if serializer.is_valid():
         # Save the user with the serialized data
-        user = serializer.save()
-        # Generate tokens for the user
-        tokens = get_tokens_for_user(user)
-        response = Response(
-            {"msg": "Registration successful"},
-            status=status.HTTP_201_CREATED,
-        )
-        is_production = not settings.DEBUG
-
-        response.set_cookie(
-            key='refresh_token',
-            value=tokens['refresh'],
-            httponly=True,
-            secure=is_production,  # Set secure only in production
-            samesite='Strict'
-        )
-        response.set_cookie(
-            key='access_token',
-            value=tokens['access'],
-            httponly=True,
-            secure=is_production,  # Set secure only in production
-            samesite='Strict'
-        )
-        return response
+            user = serializer.save()
+            # Generate tokens for the user
+            tokens = get_tokens_for_user(user)
+            response = Response(
+                {
+                    "msg": "Registration successful",
+                    "token":tokens
+                    },
+                status=status.HTTP_201_CREATED,
+            )
+            return response
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LoginView(APIView):
@@ -86,24 +82,13 @@ class LoginView(APIView):
             )
         token = get_tokens_for_user(user)
         # Create a response object with the success message and the tokens
-        response = Response({"msg": "Log-in Successful"}, status=status.HTTP_200_OK)
-        # Set cookies for the refresh and access tokens
-        response.set_cookie(
-            key='refresh_token',
-            value=token['refresh'],
-            httponly=True,
-            secure=True,
-            samesite='Strict'
-        )
-        response.set_cookie(
-            key='access_token',
-            value=token['access'],
-            httponly=True,
-            secure=True,
-            samesite='Strict'
-        )
-        # Return the response
-        return response
+        return Response(
+            {
+                "msg": "Log-in Successful",
+                "token":token
+                }, status=status.HTTP_200_OK
+            )
+        
     
 
 
@@ -141,3 +126,30 @@ class LogoutView(APIView):
             return response
         except Exception as e:
             return Response({"message": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
+class ImageUploadView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+    renderer_classes = [CustomJSONRenderer]
+
+    def post(self, request, *args, **kwargs):
+        serializer = ImageUploadSerializer(data=request.data)
+        if serializer.is_valid():
+            image = serializer.validated_data['image']
+            img = Image.open(image)
+            img_path = './test_images/image.jpg'
+            img.save(img_path)  
+            
+            obj.convert(img_path)
+            colorful_img_path = './result_images/image.jpg'
+            # Save the image to an in-memory file
+            color_img = Image.open(colorful_img_path)
+            img_io = io.BytesIO()
+            color_img.save(img_io, format='JPEG')
+            img_io.seek(0)
+
+            return Response({
+                'image': img_io.read()
+            }, content_type='image/jpeg')
+
+        return Response(serializer.errors, status=400)

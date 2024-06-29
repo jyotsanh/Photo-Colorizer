@@ -1,7 +1,9 @@
+import "./home/home.css"
+
 function Home(){
     return (
-        <div>
-            <h1>Home</h1>
+        <div id="title">
+            <h1>Welcome to Temple Vision</h1>
         </div>
     );
 }

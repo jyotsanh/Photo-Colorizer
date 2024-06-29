@@ -87,3 +87,5 @@ class User(AbstractBaseUser):
         if not value:
             raise ValidationError('Username cannot be blank')
 
+class Image(models.Model):
+    image = models.ImageField(upload_to='images')

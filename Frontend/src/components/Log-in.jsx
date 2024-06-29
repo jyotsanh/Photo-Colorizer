@@ -9,7 +9,13 @@ const Login = ({ onLogin }) => {
         password: '',
     });
 
+    const handleChange = () =>{
 
+    }
+
+    const handleSubmit = () => {
+        
+    }
     return (
         <form onSubmit={handleSubmit}>
             <input type="email" name="email" placeholder="Email" onChange={handleChange} />

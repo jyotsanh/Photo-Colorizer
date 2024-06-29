@@ -13,6 +13,10 @@ export const loginUser = async (userData) => {
   return response.data;
 };
 
+export const newFunction = async ()=>{
+  
+}
+
 export const getProfile = async (accessToken) => {
   const response = await axios.get(`${API_URL}/profile`, {
     headers: {

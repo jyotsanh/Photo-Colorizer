@@ -48,3 +48,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email', 'username']
+        
+class ImageUploadSerializer(serializers.Serializer):
+    image = serializers.ImageField()

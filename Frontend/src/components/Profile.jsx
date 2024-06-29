@@ -4,7 +4,7 @@ import { getProfile } from '../services/api';
 
 function Profile() {
     <>
-        <div>
+        <div id='Profile'>
             Profile
         </div>
     </>
