@@ -16,6 +16,8 @@ function NavBar(){
                     <p onClick={() => navigate("/contact")}> Contact-Us</p>
                     <p onClick={() => navigate("/register")}> Sign Up</p>
                     <p onClick={() => navigate("/login")}> Log-In</p>
+                    <p onClick={() => navigate("/profile")}>profile</p>
+                    <p onClick={() => navigate("/logout")}>Logout</p>
                     
                 </div>
             </div>

@@ -25,7 +25,7 @@ function Register() {
         return passwordRegex.test(password);
     };
 
-    const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
         e.preventDefault();
         setSuccessMessage("")
         setErrors({});
@@ -38,17 +38,12 @@ function Register() {
             "password":password,
             "password2":password2
         }
+        
         try{
             const response = await registerUser(formData);
-            if (response.status == 'success'){
-                console.log("completed")
-                setSuccessMessage("SIGNED UP SUCCESSFULLY");
-            }
-            
-            console.log("response:")
-            const {msg} = response.data //->registration succesfull
-            const {token} = response.data 
-
+            const {msg} = response
+            const {token} = response 
+            setSuccessMessage(msg)
             if (token) {
                 const { access, refresh } = token; //-> token fetched
                 console.log(access);
@@ -56,17 +51,14 @@ function Register() {
                 // Store the tokens in cookies
                 Cookies.set('accessToken', access);
                 Cookies.set('refreshToken', refresh);
-            } else {
-                console.log("Tokens are not coming");
             }
-            
-        } catch(error){
-            const {data } = error.response
-            const error_msg = data.errors
-            console.log('Sign-up email error:', error_msg.email);
-            console.log('Sign-up username error:', error_msg.username);
-            console.log('Sign-up pswd error:', error_msg.non_field_errors);
-            setErrors({ email: error_msg.email, username: error_msg.username, password: error_msg.non_field_errors });
+            } catch(error){
+            const {data } = error.response 
+            const {email,username,non_field_errors} = data.errors
+            // console.log(username)
+            // console.log(email) -------------------> testing approachess
+            // console.log(non_field_errors)
+            setErrors({ email: email, username: username, password: non_field_errors });
         }
         
     }
@@ -112,7 +104,15 @@ function Register() {
             required 
             />
 
-            <input type="password" name="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+            <input 
+            type="password" 
+            name="password" 
+            placeholder="Password" 
+            value={password} 
+            onChange={(e) => setPassword(e.target.value)} 
+            required 
+            />
+
             <input 
             type="password" 
             name="password2" 

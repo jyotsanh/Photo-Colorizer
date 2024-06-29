@@ -192,11 +192,6 @@ AUTH_USER_MODEL = 'api.User'
 # Set the default renderer class to our custom JSON renderer.
 # This allows us to customize the JSON response format.
 REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': (
-        # Specify the fully qualified class name of the custom JSON renderer.
-        # The custom JSON renderer is defined in the 'api' app.
-        'api.renderers.CustomJSONRenderer',
-    ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 6,
      'DEFAULT_FILTER_BACKENDS': [

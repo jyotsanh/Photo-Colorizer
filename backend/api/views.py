@@ -9,6 +9,8 @@ from rest_framework.exceptions import AuthenticationFailed
 from django.contrib.auth import authenticate
 from django.conf import settings
 from PIL import Image
+
+
 import io
 from .utility import Converter
 
@@ -20,7 +22,7 @@ from .serializers import (
     UserProfileSerializer, 
     ImageUploadSerializer
 ) # all the serializers class from serialzers.py
-from api.renderers import CustomJSONRenderer
+
 
 
 # Define a function to generate tokens for a user
@@ -35,7 +37,6 @@ def get_tokens_for_user(user):
 
 # Define a class for user registration
 class RegisterView(APIView):
-    renderer_classes = [CustomJSONRenderer]
 
     # Define a post method to handle user registration
     def post(self, request):
@@ -57,14 +58,17 @@ class RegisterView(APIView):
             )
             return response
         else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response({
+                "errors": serializer.errors,
+                
+                },status=status.HTTP_400_BAD_REQUEST)
 
 
 class LoginView(APIView):
-    renderer_classes = [CustomJSONRenderer]
 
     # Define a post method to handle user login
     def post(self, request):
+        print(request.data)
         # Create a serializer object with the user login data
         serializer = UserLoginSerializer(data=request.data)
         # Check if the data is valid and raise an exception if not
@@ -78,7 +82,7 @@ class LoginView(APIView):
         if user is None:
             return Response(
                 {"errors": {"non_field_errors": ["Email or password is not valid"]}},
-                status=status.HTTP_404_NOT_FOUND,
+               
             )
         token = get_tokens_for_user(user)
         # Create a response object with the success message and the tokens
@@ -95,13 +99,13 @@ class LoginView(APIView):
 class UserView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
-    renderer_classes = [CustomJSONRenderer]
 
     # Define a get method to retrieve the user profile
     def get(self, request):
         # Get the logged in user
         user = request.user
         # Create a serializer object with the user profile data
+        
         serializer = UserProfileSerializer(user)
         # Return the serialized user profile data
         return Response(
@@ -112,13 +116,12 @@ class UserView(APIView):
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
-    renderer_classes = [CustomJSONRenderer]
 
     def post(self, request):
         try:
+            print(request.data["refresh"])
             refresh_token = request.data["refresh"]
             token = RefreshToken(refresh_token)
-            token.blacklist()
 
             response = Response({"message": "Success"})
             response.delete_cookie('refresh_token')
@@ -130,7 +133,7 @@ class LogoutView(APIView):
 class ImageUploadView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
-    renderer_classes = [CustomJSONRenderer]
+
 
     def post(self, request, *args, **kwargs):
         serializer = ImageUploadSerializer(data=request.data)

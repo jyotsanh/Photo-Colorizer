@@ -13,11 +13,24 @@ export const loginUser = async (userData) => {
   return response.data;
 };
 
-export const newFunction = async ()=>{
-  
+export const Logout = async (refreshToken,accessToken)=>{
+  try{
+    const response = await axios.post(`${API_URL}/logout`,
+      { refresh: refreshToken },
+      { headers: {
+        Authorization: `Bearer ${accessToken}`,
+          },
+      }
+    )
+    return response.data
+}catch(error){
+  console.error('Logout error:', error);
+  throw error;
 }
+  }
 
 export const getProfile = async (accessToken) => {
+  console.log("i AM")
   const response = await axios.get(`${API_URL}/profile`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
