@@ -12,7 +12,7 @@ from PIL import Image
 
 
 import io
-from .utility import Converter
+from .utility import Converter,WrapperConverter
 
 obj  = Converter()
 
@@ -138,15 +138,19 @@ class ImageUploadView(APIView):
     def post(self, request, *args, **kwargs):
         serializer = ImageUploadSerializer(data=request.data)
         if serializer.is_valid():
-            image = serializer.validated_data['image']
+            image = serializer.validated_data['image'] # ->  it extracts the image from the validated data.
             img = Image.open(image)
             img_path = './test_images/image.jpg'
-            img.save(img_path)  
+            img.save(img_path)   #-> uploaded image is opened using the PIL library and saved to a local path 
             
-            obj.convert(img_path)
-            colorful_img_path = './result_images/image.jpg'
+            result_image_path = WrapperConverter(img_path)
+            if result_image_path == False:
+                return Response({
+                'msg': "Something went wrong. image_path or url is not valid."
+            }, status=404)
+            
             # Save the image to an in-memory file
-            color_img = Image.open(colorful_img_path)
+            color_img = Image.open(result_image_path)
             img_io = io.BytesIO()
             color_img.save(img_io, format='JPEG')
             img_io.seek(0)

@@ -1,4 +1,58 @@
-#title {
-    color: rgb(153, 204, 157);
+/* App.css */
+.container {
     text-align: center;
+    padding: 20px;
+    font-family: 'Arial, sans-serif';
+}
+
+.header {
+    background-color: blueviolet;
+    color: white;
+    padding: 10px 0;
+    border-radius: 6px;
+}
+
+.upload-section {
+    margin: 20px 0;
+}
+
+.file-input {
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.upload-button {
+    background-color: blueviolet;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.upload-button:hover {
+    background-color: rgb(119, 38, 196);
+}
+
+.image-section {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.image-container {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.image-container h3 {
+    margin-top: 0;
+}
+
+.image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
 }

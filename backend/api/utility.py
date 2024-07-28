@@ -11,51 +11,38 @@ if not torch.cuda.is_available():
     
     
 import fastai
-from deoldify.visualize import *
+from deoldify.visualize import get_image_colorizer
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning, message=".*?Your .*? set is empty.*?")
 
-
-def main():
-    colorizer = get_image_colorizer(artistic=True)
-
-
-    path_p = './test_images/rose.jpg' #@param {type:"string"}
-    render_factor = 35  #@param {type: "slider", min: 7, max: 40}
-    watermarked = True #@param {type:"boolean"}
-
-    if path_p is not None and path_p !='':
+class Converter():
+    def __init__(self):
+        pass
+    def convert(self,b_w_image_path='./test_images/rose.jpg',url=''):
+        colorizer = get_image_colorizer(artistic=True)
+        render_factor = 35  #@param {type: "slider", min: 7, max: 40}
+        watermarked = True #@param {type:"boolean"}
+        
         image_path = colorizer.plot_transformed_image_from_url(
-            url='',
-            path=path_p,
+            url = url,
+            path=b_w_image_path,
             render_factor=render_factor, 
             compare=True, 
             watermarked=watermarked
             )
         print(image_path)
+        return image_path
+        
+def WrapperConverter(path='',url=''):
+    if path is not None and path !='':
+        converter = Converter()
+        return converter.convert(path,url)
     else:
         print('Provide an image url and try again.')
-    
-    
-class Converter():
-    def __init__(self):
-        pass
-    def convert(self,b_w_image_path='./test_images/rose.jpg'):
-        colorizer = get_image_colorizer(artistic=True)
-        render_factor = 35  #@param {type: "slider", min: 7, max: 40}
-        watermarked = True #@param {type:"boolean"}
+        return False
 
-        if b_w_image_path is not None and b_w_image_path !='':
-            image_path = colorizer.plot_transformed_image_from_url(
-                url = 'https://cdn.naturettl.com/wp-content/uploads/2019/06/27085016/black-white-wildlife-photography-2.jpg',
-                path=b_w_image_path,
-                render_factor=render_factor, 
-                compare=True, 
-                watermarked=watermarked
-                )
-            print(image_path)
-        else:
-            print('Provide an image url and try again.')
 
 if __name__ == '__main__':
-    main()
+    path = "./test_images/elephanto.jpg"
+    url='https://cdn.naturettl.com/wp-content/uploads/2019/06/27085016/black-white-wildlife-photography-2.jpg'
+    WrapperConverter(path=path,url= url)

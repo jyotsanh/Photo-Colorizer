@@ -13,7 +13,7 @@ function NavBar(){
                 <div className="links-container">
                     <p onClick={() => navigate("/")}> Home</p>
                     <p onClick={() => navigate("/about")}> About Us</p>
-                    <p onClick={() => navigate("/contact")}> Contact-Us</p>
+                    <p onClick={() => navigate("/upload")}> Upload</p>
                     <p onClick={() => navigate("/register")}> Sign Up</p>
                     <p onClick={() => navigate("/login")}> Log-In</p>
                     <p onClick={() => navigate("/profile")}>profile</p>

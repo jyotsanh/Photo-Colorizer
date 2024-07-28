@@ -5,7 +5,6 @@ import SignUp from "../src/components/Register";
 import SignIn from "../src/components/Log-in";
 import Contact from "../src/components/contact/contactUs.jsx";
 import Profile from "../src/components/Profile.jsx";
-
 function ConditionalRoute() {
 
 
@@ -16,8 +15,9 @@ function ConditionalRoute() {
             <Route path='/profile' element={<Profile />} />
             <Route path='/login' element={<SignIn />} />
             <Route path='/' element={<Home />} />
-            <Route path="/about" element={<About />} />
+            <Route path='/about' element={<About />} />
             <Route path='/contact' element={<Contact />} />
+            
         </Routes>
     </>
     );
