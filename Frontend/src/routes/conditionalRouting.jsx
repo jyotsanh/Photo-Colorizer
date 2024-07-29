@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom"
-import Register from '../components/Register.jsx';
-import Login from '../components/Log-in.jsx';
-import Home from '../components/Home.jsx';
+import Register from '../components/register/Register.jsx';
+import Login from '../components/Log-In/Log-in.jsx';
+import Home from '../components/home/Home.jsx';
 import About from "../components/AboutUs/about.jsx"
 import ContactUs from "../components/contact/contactUs.jsx"
 import Profile  from "../components/profile/profile.jsx";
