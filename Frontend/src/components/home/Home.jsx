@@ -1,6 +1,5 @@
-import "./home/home.css"
-import React, { useState } from 'react';
-import axios from 'axios';
+import "./home.css"
+
 function Home(){
     const [selectedFile, setSelectedFile] = useState(null);
     const [originalImage, setOriginalImage] = useState(null);
