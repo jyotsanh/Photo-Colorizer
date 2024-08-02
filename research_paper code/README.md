@@ -34,17 +34,17 @@ The code as is runs in Python 3.8.10 with the following dependencies:
 
 Detailed versions on requirements.txt:
 
-* [PyTorch](http://pytorch.org/) 
+* [PyTorch](http://pytorch.org/)
 * [Torchvision](https://pytorch.org/vision/stable/index.html)
 * [scikit-learn](https://scikit-learn.org/stable/)
 * [OpenCV](https://pypi.org/project/opencv-python/)
-
 
 ### Usage
 
 #### 1. Testing
 
 If you want to colorize an image using the pretrained model found you can execute:
+
 ```
 
 python3 main.py \
@@ -55,6 +55,7 @@ python3 main.py \
 ```
 
 If you want to colorize a video using the pretrained model found you can execute:
+
 ```
 
 python3 main.py \
@@ -65,6 +66,7 @@ python3 main.py \
 ```
 
 **NOTES**
+
 * Model have been trained with spectral normalization
 * The default render_factor is 12, but it is possible this value not be the best for your image.
 * The resulting image will be called "Colorized.jpeg" and will be in the same directory as main.py
@@ -73,26 +75,29 @@ python3 main.py \
 
 The network is trained with four epochs of Imagenet (https://image-net.org/challenges/LSVRC/2012/index.php). During  the two first epochs, the training images are down-sampled to  $ 64 \times 64 $ pixels. During the third epoch, they are down-sampled only to $ 128 \times 128 $ pixels, and $ 192 \times 192 $ pixels for the last epoch.
 
-epoch 1: 
+epoch 1:
+
 ```
 python main.py --train=True --train_data="Path to train data" --normalize=True --img_size=64 --batch_size=88 --max_lr=1e-3 --middle=0.8 --spectral=True  
 ```
 
-epoch 2: 
+epoch 2:
+
 ```
 python3 main.py --train=True --train_data="Path to train data" --normalize=True --img_size=64 --batch_size=88 --max_lr=3e-4 --middle=1e-8 --pretrained=./training/epoch_0.pth --spectral=True
 ```
 
-epoch 3: 
-``` 
+epoch 3:
+
+```
 python main.py --train=True --train_data="Path to train data" --normalize=True --img_size=128 --batch_size=20 --max_lr=1e-4 --middle=1e-8 --pretrained=./training/epoch_0.pth --spectral=True
 ```
 
-epoch 4: 
+epoch 4:
+
 ```
 python main.py --train=True --train_data="Path to train data" --normalize=True --img_size=192 --batch_size=8 --max_lr=5e-5 --middle=1e-8 --pretrained=./training/epoch_0.pth --percent=0.5 --spectral=True
 ```
-
 
 ## ABOUT THIS FILE
 

@@ -163,8 +163,8 @@ if __name__ == '__main__':
             model = Model(unet,args.optim,args.criterion,loss_params=loss_params)
             print('starting training')
             model.fit(data,args.epochs,args.batch_size,val_data=args.val_data,
-                      resume_training=args.resume_training,log_dir=args.log_dir,
-                      save_dir=args.save_dir,max_lr=args.max_lr,div_factor=args.div_factor,
-                      momentum_range=args.momentum_range,middle=args.middle,percent=args.percent,
-                      alpha_popping=args.alpha_popping,freq_save=args.freq_save)
+                        resume_training=args.resume_training,log_dir=args.log_dir,
+                        save_dir=args.save_dir,max_lr=args.max_lr,div_factor=args.div_factor,
+                        momentum_range=args.momentum_range,middle=args.middle,percent=args.percent,
+                        alpha_popping=args.alpha_popping,freq_save=args.freq_save)
         

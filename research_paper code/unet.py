@@ -130,7 +130,7 @@ class Unet(nn.Module):
         self.up_blocks = nn.ModuleList(up_blocks)
         self.last_upsample = UpSample(256,256,blur=blur,last=True,spectral=spectral)
         self.res_block = nn.Sequential(ConvBlock(259,259,3,spectral=spectral,bias=True),
-                                       ConvBlock(259,259,3,spectral=spectral,bias=True))
+                                        ConvBlock(259,259,3,spectral=spectral,bias=True))
         self.dense = ConvBlock(259,n_channels,1,use_activ=False,bias=True,spectral=spectral)
         self.sigmoid = SigmoidRange(*y_range)
         
@@ -142,9 +142,12 @@ class Unet(nn.Module):
         
         self.pretrained = pretrained is not None
         if pretrained is not None:
-            state_dict = torch.load(pretrained,map_location='cpu')['state_dict']
+            state_dict = torch.load(pretrained,map_location='cpu')
+            if 'model' in state_dict:
+                state_dict = state_dict['model']
+            
             self.load_state_dict(state_dict,strict=True)
-
+            print('pretrained model loaded')
 
     def forward(self,x):
         if self.n_channels==2: #if n_channels==2 predict chrominances of YUV space
