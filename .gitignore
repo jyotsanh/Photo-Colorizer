@@ -56,7 +56,11 @@ coverage.xml
 cover/
 
 downloaded_images/
+WebScraping/data
+WebScraping/wattermark remover
+WebScraping/watermark remover repo
 
+research_paper code/models
 # Translations
 *.mo
 *.pot
