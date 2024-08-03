@@ -30,4 +30,8 @@ The aim of this project is to revive historical and cultural heritage by bringin
 3. Fine-tune selected models to enhance their performance on temple photos.
 4. Develop a user-friendly frontend for users to upload and view colorized photos.
 
+## Fine-tuning
+1. Experimented a ColorizeTrainingArtistic.ipynb file to train the model from scratch on 1400 images it shows improvements
+2. Lack of Data seems to be the problems
+3. While fine-tuning the model is possible i just little more time with the notebook to figure out how it is training.s
 Stay tuned for updates as we progress with our project!
