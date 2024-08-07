@@ -132,7 +132,8 @@ celerybeat.pid
 *.sage.py
 
 WebScraper/temples
-
+WebScraper/images
+WebScraper/primaryData
 # Environments
 .env
 .venv
