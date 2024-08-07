@@ -33,8 +33,9 @@ class Converter():
         print(image_path)
         return image_path
         
-def WrapperConverter(path='',url=''):
-    if path is not None and path !='':
+def WrapperConverter(path,url):
+    
+    if path is not None and url == '':
         converter = Converter()
         return converter.convert(path,url)
     else:
@@ -43,6 +44,6 @@ def WrapperConverter(path='',url=''):
 
 
 if __name__ == '__main__':
-    path = "./test_images/elephanto.jpg"
-    url='https://cdn.naturettl.com/wp-content/uploads/2019/06/27085016/black-white-wildlife-photography-2.jpg'
+    path = "./test_images/image2.png"
+    url=''
     WrapperConverter(path=path,url= url)

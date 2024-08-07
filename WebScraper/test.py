@@ -12,14 +12,14 @@ def rename_images(folder_path):
     
     # Rename the files
     for index, file_name in enumerate(image_files):
-        new_name = f"imagev1_{index}.jpg"
+        new_name = f"imagev3_{index}.jpg"
         old_path = os.path.join(folder_path, file_name)
         new_path = os.path.join(folder_path, new_name)
         os.rename(old_path, new_path)
         print(f"Renamed {file_name} to {new_name}")
 
 # Specify the path to the temples folder
-temples_folder_path = "./temples"
+temples_folder_path = "./primaryData"
 
 # Ensure the folder exists
 if os.path.exists(temples_folder_path):

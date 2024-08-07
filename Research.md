@@ -46,3 +46,17 @@
     - Orange part is self-attention layer
     - at Last pink is sigmoid layer
     - the black lines are skip connectuin which are commin in U-Net architecture.
+## Training Phases:
+
+  - Initial Training: The model "ArtisticModel" is trained from scratch starting with an image size of 64x64.
+    - Progressive Training: The model is then incrementally trained with larger image sizes of 128x128 and 192x192. Each phase involves saving the model and then loading it for the next training phase.
+  - Evaluation:
+
+    - Generate Images: After training with the largest image size, the generator model is used to generate images to evaluate its performance.
+  - GAN Technique:
+
+    - Simultaneous Training: The GAN technique is employed where both the generator and critic models are trained simultaneously. The generator creates images, while the critic evaluates them, and both models are adjusted based on their interactions.
+  - Final Fine-Tuning:
+
+    - Checkpoint Selection: The best checkpoint (with fewer glitches) is selected based on its performance.
+    - Fine-Tuning: This checkpoint model is then fine-tuned by freezing all layers except for the last one. This ensures that the model's existing knowledge is preserved while focusing on fine-tuning the last layer for further improvements.
