@@ -16,10 +16,11 @@ import warnings
 warnings.filterwarnings("ignore", category=UserWarning, message=".*?Your .*? set is empty.*?")
 
 class Converter():
-    def __init__(self):
+    def __init__(self,model_name):
+        self.model_name = model_name
         pass
     def convert(self,b_w_image_path='./test_images/rose.jpg',url=''):
-        colorizer = get_image_colorizer(artistic=True)
+        colorizer = get_image_colorizer(model_name=self.model_name,artistic=True)
         render_factor = 35  #@param {type: "slider", min: 7, max: 40}
         watermarked = True #@param {type:"boolean"}
         
@@ -33,10 +34,10 @@ class Converter():
         print(image_path)
         return image_path
         
-def WrapperConverter(path,url):
+def WrapperConverter(path,url,model_name):
     
     if path is not None and url == '':
-        converter = Converter()
+        converter = Converter(model_name)
         return converter.convert(path,url)
     else:
         print('Provide an image url and try again.')
@@ -44,6 +45,9 @@ def WrapperConverter(path,url):
 
 
 if __name__ == '__main__':
-    path = "./test_images/image2.png"
-    url=''
-    WrapperConverter(path=path,url= url)
+    for i in range(0,3):
+        model_name = f"ArtisticModel_gen_{i}"
+        path = f"./test_images/test_{i+1}.jpg"
+        url=''
+        print(model_name)
+        WrapperConverter(path=path,url= url,model_name=model_name)

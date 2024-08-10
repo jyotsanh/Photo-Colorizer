@@ -1,3 +1,4 @@
+import os
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -9,12 +10,14 @@ from rest_framework.exceptions import AuthenticationFailed
 from django.contrib.auth import authenticate
 from django.conf import settings
 from PIL import Image
+from django.http import HttpResponse, FileResponse
 
 
 import io
-from .utility import Converter,WrapperConverter
+from .utility import Converter
 
-obj  = Converter()
+MODEL_NAME = "ArtisticModel_gen_2"
+
 
 from .serializers import (
     UserRegistrationSerializer, 
@@ -131,32 +134,30 @@ class LogoutView(APIView):
             return Response({"message": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         
 class ImageUploadView(APIView):
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [JWTAuthentication]
-
-
+    
     def post(self, request, *args, **kwargs):
         serializer = ImageUploadSerializer(data=request.data)
         if serializer.is_valid():
-            image = serializer.validated_data['image'] # ->  it extracts the image from the validated data.
+            color = Converter(MODEL_NAME)
+            image = serializer.validated_data['image']
             img = Image.open(image)
-            img_path = './test_images/image.jpg'
-            img.save(img_path)   #-> uploaded image is opened using the PIL library and saved to a local path 
             
-            result_image_path = WrapperConverter(img_path)
-            if result_image_path == False:
+            img_dir = './test_images/'
+            img_path = os.path.join(img_dir, 'image.jpg')
+
+            # Create the directory if it doesn't exist
+            os.makedirs(img_dir, exist_ok=True)
+            img.save(img_path)
+            
+            url = ''
+            result_image_path = color.convert(img_path, url)
+            if not result_image_path:
                 return Response({
-                'msg': "Something went wrong. image_path or url is not valid."
-            }, status=404)
+                    'msg': "Something went wrong. image_path or url is not valid."
+                }, status=404)
+
+            # Open the resulting image file and return it as a FileResponse
+            response = FileResponse(open(result_image_path, 'rb'), content_type='image/jpeg')
+            return response
             
-            # Save the image to an in-memory file
-            color_img = Image.open(result_image_path)
-            img_io = io.BytesIO()
-            color_img.save(img_io, format='JPEG')
-            img_io.seek(0)
-
-            return Response({
-                'image': img_io.read()
-            }, content_type='image/jpeg')
-
         return Response(serializer.errors, status=400)

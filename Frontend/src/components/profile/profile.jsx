@@ -15,7 +15,7 @@ const Profile =  ()=> {
             const accessToken = Cookies.get('accessToken');
             console.log(`access token : ${accessToken}`)
             if (!accessToken) {
-                setError('No access token found. Please log in.');
+                setError('Please Sign-in/Sign-Up.');
                 return;
             }
             try {
@@ -30,12 +30,26 @@ const Profile =  ()=> {
         }
         fetchProfile();
     }, []);
+    const handleSignIn = () => {
+        navigate('/login'); // For React Router v6
+    };
 
 if (error) {
-    return <p style={{ color: 'red' }}>{error}</p>;
+    return (
+        <>
+        <p style={{ color: 'red' }}>{error}</p>
+        <button onClick={handleSignIn}>Sign-In</button>
+        </>
+    );
 }
 if (!profile) {
-    return <p>Loading profile...</p>;
+    return (
+    <>
+    <p>Loading profile...</p>
+    <button onClick={handleSignIn}>Sign-In</button>
+    </>
+
+    );
 }
     return (
         <>
