@@ -1,13 +1,14 @@
 import React from "react"
 import { useNavigate } from 'react-router-dom'
 import "./navbar.css"
+import Temple from '../../assets/Temple.png'
 function NavBar(){
     const navigate = useNavigate();
     return (
         <>
             <div className="navbar">
                 <div className="logo-container">
-                    <img src="./vite.svg"></img>
+                    <img src={Temple}></img>
                 </div>
 
                 <div className="links-container">
