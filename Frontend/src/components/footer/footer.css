@@ -1,0 +1,13 @@
+.about-footer {
+    /* margin-top: 30px; */
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    color: #999;
+    font-size: 0.9em;
+text-align: center;
+  }
+  
+  .about-footer p {
+    margin: 0;
+  }
+  
