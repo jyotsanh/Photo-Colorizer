@@ -16,7 +16,7 @@ from django.http import HttpResponse, FileResponse
 import io
 from .utility import Converter
 
-MODEL_NAME = "ArtisticModel_gen_4"
+MODEL_NAME = "ArtisticModel_gen_0"
 
 
 from .serializers import (
