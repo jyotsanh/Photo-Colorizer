@@ -79,9 +79,9 @@ function Home() {
 
             {/* If u cannot uplaod from that then onlu uncomment this one */}
             
-            {/* <div className="upload-section">
+            <div className="upload-section">
                 <input type="file" onChange={handleFileChange} className="file-input" />
-            </div> */}
+            </div>
 
                     {/* First try to uplaod the image with this uplaod button  */}
 
