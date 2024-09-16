@@ -87,7 +87,7 @@ function Home() {
 
             <div className="buttons-container">
                 <button onClick={handleUpload} className="upload-photo-button" disabled={loading}>
-                    <FaUpload className="icon" /> {loading ? 'Processing...' : 'Upload Photo'}
+                    <FaUpload className="icon" /> {loading ? 'Processing...' : 'Convert'}
                 </button>
                 <button onClick={handleDownload} className="download-button" disabled={!coloredImage}>
                     <FaDownload className="icon" /> Download

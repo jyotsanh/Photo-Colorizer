@@ -8,7 +8,7 @@ from sklearn.metrics import mean_squared_error
 def resize_image(image, size=(192, 192)):
     if image is None:
         return None
-    return cv2.resize(image, size)
+    return image
 
 # Function to calculate metrics
 def calculate_metrics(img_true, img_pred):
@@ -18,9 +18,9 @@ def calculate_metrics(img_true, img_pred):
     return mse_value, psnr_value, ssim_value
 
 # Define the folders
-original_folder = 'G:/Photo-Colorizer/backend/api/Evaluation/Original Image'
-finetune_folder = 'G:/Photo-Colorizer/backend/api/Evaluation/FineTune'
-pretrained_folder = 'G:/Photo-Colorizer/backend/api/Evaluation/PreTrained'
+original_folder = 'G:\\Photo-Colorizer\\backend\\api\\Evaluation\\Original Image'
+finetune_folder = 'G:\\Photo-Colorizer\\backend\\api\\Evaluation\\FineTune\\try2'
+pretrained_folder = 'G:\\Photo-Colorizer\\backend\\api\\Evaluation\\PreTrained\\try1'
 
 # Initialize lists to store metrics
 mse_finetune, psnr_finetune, ssim_finetune = [], [], []
@@ -31,10 +31,12 @@ for filename in os.listdir(original_folder):
     if filename.endswith(('.png', '.jpg', '.jpeg')):
         # Load and resize the original image
         original_path = os.path.join(original_folder, filename)
-        original_image = resize_image(cv2.imread(original_path))
+        original_image = cv2.imread(original_path)
 
         if original_image is None:
-            print(f"Warning: Could not load original image: {original_path}")
+            print("original path")
+            print(original_path)
+            
             continue
 
         # Load and resize the fine-tuned model's output
@@ -42,7 +44,9 @@ for filename in os.listdir(original_folder):
         finetune_image = resize_image(cv2.imread(finetune_path))
 
         if finetune_image is None:
-            print(f"Warning: Could not load fine-tuned image: {finetune_path}")
+            print(f"finetune path: {finetune_path}")
+            print()
+
             continue
 
         # Load and resize the pre-trained model's output
@@ -50,7 +54,9 @@ for filename in os.listdir(original_folder):
         pretrained_image = resize_image(cv2.imread(pretrained_path))
 
         if pretrained_image is None:
-            print(f"Warning: Could not load pre-trained image: {pretrained_path}")
+            print("pretrained_path")
+            print(pretrained_path)
+            
             continue
 
         # Calculate metrics for fine-tuned model
