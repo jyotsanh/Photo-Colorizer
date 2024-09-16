@@ -45,9 +45,9 @@ def WrapperConverter(path,url,model_name):
 
 
 if __name__ == '__main__':
-    for i in range(0,5):
-        model_name = f"ArtisticModel_gen_{i}"
-        path = f"./test_images/test_image_0{i+1}.jpeg"
+    for i in range(0,12):
+        model_name = f"FineTuned"
+        path = f"./Evaluation/GrayScale/test_image0{i+1}.jpg"
         url=''
         print(model_name)
         WrapperConverter(path=path,url= url,model_name=model_name)

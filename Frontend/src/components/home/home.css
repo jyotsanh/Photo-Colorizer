@@ -1,15 +1,40 @@
-/* App.css */
 .container {
     text-align: center;
-    padding: 20px;
-    font-family: 'Arial, sans-serif';
+    font-family: 'Anek Bangla' ;
 }
 
 .header {
-    background-color: blueviolet;
-    color: white;
-    padding: 10px 0;
-    border-radius: 6px;
+    margin: 20px 0;
+    color: #B89029; 
+    font-family: 'Anek Bangla' ;
+}
+
+.image-section {
+    margin: 20px 0;
+    /* margin-top: 30x; */
+    display: flex;
+    justify-content: center;
+}
+
+.image-parts {
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+}
+
+.image-part {
+    margin: 0 10px;
+}
+
+.image {
+    max-width: 600px;
+    max-height: 600px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+}
+
+.loading-message {
+    color: #8b4513;
 }
 
 .upload-section {
@@ -17,42 +42,59 @@
 }
 
 .file-input {
-    margin-right: 10px;
-    padding: 5px;
+    margin-bottom: 20px;
 }
 
-.upload-button {
-    background-color: blueviolet;
+.buttons-container {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.upload-photo-button,
+.download-button {
+    background-color: #228b22;
     color: white;
     border: none;
     padding: 10px 20px;
-    cursor: pointer;
     border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.upload-button:hover {
-    background-color: rgb(119, 38, 196);
+.upload-photo-button:disabled,
+.download-button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
 }
 
-.image-section {
+.heritage-section {
+    margin-top: 50px;
+    width: 900px;
+    color: #B89029;
+    text-align: center;
+    align-items: center;
+    margin-left: 250px;
+    font-family: 'Anek Bangla';
+}
+
+.heritage-content {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
+    align-items: center;
 }
 
-.image-container {
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 5px;
+.heritage-image {
+    max-width: 300px;
+    margin-right: 30px;
+    margin-top: 30px;
 }
 
-.image-container h3 {
-    margin-top: 0;
-}
-
-.image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
+.heritage-description {
+    max-width: 400px;
+    text-align: left;
+    color: 686868;
 }

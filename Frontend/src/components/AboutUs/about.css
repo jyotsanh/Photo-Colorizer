@@ -1,0 +1,32 @@
+.about-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(108vh - 160px); /* Adjusting for the height of navbar and footer */
+    background-color: #F3F1ED;
+    text-align: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+  
+  .about-title {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 40px;
+    margin-top: 0;
+  }
+  
+  .about-content {
+    max-width: 800px;
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #333;
+  }
+  
+  .about-content p {
+    margin-bottom: 20px;
+    font-family: 'Anek Bangla', sans-serif;
+  }
+  
