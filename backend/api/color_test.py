@@ -21,13 +21,12 @@ class Converter():
         pass
     def convert(self,b_w_image_path='./test_images/rose.jpg',url=''):
         colorizer = get_image_colorizer(model_name=self.model_name,artistic=True)
-        render_factor = 35  #@param {type: "slider", min: 7, max: 40}
         watermarked = True #@param {type:"boolean"}
         
         image_path = colorizer.plot_transformed_image_from_url(
             url = url,
             path=b_w_image_path,
-            render_factor=35, 
+            render_factor=20,  #@param {type: "slider", min: 7, max: 40}
             compare=True, 
             watermarked=watermarked
             )
@@ -45,10 +44,13 @@ def WrapperConverter(path,url,model_name):
 
 
 if __name__ == '__main__':
-    models = ['ArtisticModel_gen_0','ArtisticModel_gen_1','ArtisticModel_gen_2','ArtisticModel_gen_3','ArtisticModel_gen_4','ArtisticModel_gen_5','ArtisticModel_gen_6','ArtisticModel_gen_7','ArtisticModel_gen_8']
-    for i in range(0,29):
-        model_name = f"ArtisticModel_gen_4"
-        path = f"G:/Photo-Colorizer/backend/api/Evaluation/GrayScale/test_image{i+1}.jpg"
-        url=''
-        print(model_name)
-        WrapperConverter(path=path,url= url,model_name=model_name)
+    models = ['ArtisticModel_gen_0','ArtisticModel_gen_1','ArtisticModel_gen_1_2_100','ArtisticModel_gen_1_5_200','ArtisticModel_gen_2','ArtisticModel_gen_2_2_100','ArtisticModel_gen_2_5_200','ArtisticModel_gen_3_2_100','ArtisticModel_gen_3_5_200','ArtisticModel_gen_3']
+    for i in range(0,54):
+        if i==30:
+            continue
+        else:
+            model_name = f"ArtisticModel_gen_3_2_100"
+            path = f"G:/Photo-Colorizer/backend/api/Evaluation/GrayScale/test_image{i+1}.jpg"
+            url=''
+            print(model_name)
+            WrapperConverter(path=path,url= url,model_name=model_name)

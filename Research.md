@@ -1,3 +1,7 @@
+# TempleVision:
+## Introduction : 
+- This project is the Final Year project of Bachelor in Information Technology, which i made during my 5th semester,This project uses DeOldify Generator model made by jason antic, this model has the best performance in the photo colorization field . Now, after carefully reading, the model architecture and it's training notebook, i was able to finetune the model on the image of data of temples from my hometown kathmandu which is a capital city of country Nepal. The data is both collected personally primary data and webscraped from the internet secondary data. The since only 2500 image of data i was able to collect the performance is not that great but it sure outperforms the pre-trained model. we use different evaluation metrices like:MSE,PSNR,SSIM. 
+
 # Generative Adversarial Network (GAN)
 
 ## Terms

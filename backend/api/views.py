@@ -1,3 +1,4 @@
+import base64
 import os
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -16,8 +17,8 @@ from django.http import HttpResponse, FileResponse
 import io
 from .utility import Converter
 
-MODEL_NAME = "ArtisticModel_gen_4"
-
+MODEL_NAME = "ArtisticModel_gen_0"
+FINE_TUNE_MODEL = "ArtisticModel_gen_3"
 
 from .serializers import (
     UserRegistrationSerializer, 
@@ -85,7 +86,7 @@ class LoginView(APIView):
         if user is None:
             return Response(
                 {"errors": {"non_field_errors": ["Email or password is not valid"]}},
-               
+            
             )
         token = get_tokens_for_user(user)
         # Create a response object with the success message and the tokens
@@ -138,7 +139,13 @@ class ImageUploadView(APIView):
     def post(self, request, *args, **kwargs):
         serializer = ImageUploadSerializer(data=request.data)
         if serializer.is_valid():
-            color = Converter(MODEL_NAME)
+            # Initialize converters for both models
+            artistic_model = Converter(MODEL_NAME,render_factor = 20)
+            fine_tuned_model = Converter(FINE_TUNE_MODEL,render_factor=20)
+            
+            
+            
+            
             image = serializer.validated_data['image']
             img = Image.open(image)
             
@@ -149,15 +156,32 @@ class ImageUploadView(APIView):
             os.makedirs(img_dir, exist_ok=True)
             img.save(img_path)
             
-            url = ''
-            result_image_path = color.convert(img_path, url)
-            if not result_image_path:
-                return Response({
-                    'msg': "Something went wrong. image_path or url is not valid."
-                }, status=404)
+            # Process with the artistic model
+            artistic_result_path = artistic_model.convert(img_path,url= '')
+            if not artistic_result_path:
+                return Response({'msg': "Something went wrong with the artistic model."}, status=404)
+            
+            with open(artistic_result_path, "rb") as artistic_file:
+                artistic_image_data = artistic_file.read()
+                
+            # Process with the fine-tuned model
+            fine_tuned_result_path = fine_tuned_model.convert(img_path,url= '')
+            if not fine_tuned_result_path:
+                return Response({'msg': "Something went wrong with the fine-tuned model."}, status=404)
 
-            # Open the resulting image file and return it as a FileResponse
-            response = FileResponse(open(result_image_path, 'rb'), content_type='image/jpeg')
-            return response
+            # Read the images into memory
+            
+            with open(fine_tuned_result_path, "rb") as fine_tuned_file:
+                fine_tuned_image_data = fine_tuned_file.read()
+            
+            # Convert the binary data to Base64 strings
+            artistic_image_base64 = base64.b64encode(artistic_image_data).decode('utf-8')
+            fine_tuned_image_base64 = base64.b64encode(fine_tuned_image_data).decode('utf-8')
+
+            # Return the base64 strings as part of the response
+            return Response({
+                'artistic_image_base64': f"data:image/jpeg;base64,{artistic_image_base64}",
+                'fine_tuned_image_base64': f"data:image/jpeg;base64,{fine_tuned_image_base64}"
+            })
             
         return Response(serializer.errors, status=400)
