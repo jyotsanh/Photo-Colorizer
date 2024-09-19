@@ -2,20 +2,40 @@
 
 .regi-container {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     height: 100vh;
-    background-color: #f7f7f7;
+    margin-top: 20px;
+    background-image: url('../../assets/image.png'); /* Adjust path as needed */
+    background-size: cover;
+    background-position: center;
+    position: relative;
 }
 
+/* Creates a light overlay for text readability */
+.regi-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(232, 231, 231, 0.05); 
+    z-index: 0;
+}
+
+
 .regi-form {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    border: 2px solid #000;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* background: #fff; */
+    background: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
+    padding: 20px 40px;
+    border-radius: 12px;
+    border: none;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 1; /* Above the overlay */
+    text-align: center;
 }
 
 .regi-input-group {

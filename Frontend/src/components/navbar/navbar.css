@@ -41,7 +41,8 @@ a {}
 }
 
 .navbar .logo-container  img{
-    width: 180px;
+    width: 150px;
+    margin-top: 15px;
 }
 
 

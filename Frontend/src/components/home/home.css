@@ -1,12 +1,14 @@
 .container {
     text-align: center;
     font-family: 'Anek Bangla' ;
+    border: 1px solid #000000;
 }
 
 .header {
     margin: 20px 0;
     color: #B89029; 
     font-family: 'Anek Bangla' ;
+  
 }
 
 .image-section {
@@ -20,6 +22,8 @@
     display: flex;
     justify-content: space-around;
     width: 80%;
+    font-family: 'Anek Bangla' ;
+
 }
 
 .image-part {
@@ -79,6 +83,7 @@
     align-items: center;
     margin-left: 250px;
     font-family: 'Anek Bangla';
+    border: 1px solid #000000;
 }
 
 .heritage-content {

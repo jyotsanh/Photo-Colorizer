@@ -2,7 +2,7 @@ import "./home.css";
 import React, { useState } from 'react';
 import axios from 'axios';
 import { FaUpload, FaDownload } from 'react-icons/fa';
-import image from '../../assets/image.png'
+import image from '../../assets/images.png'
 function Home() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [originalImage, setOriginalImage] = useState(null);
@@ -79,15 +79,15 @@ function Home() {
 
             {/* If u cannot uplaod from that then onlu uncomment this one */}
             
-            {/* <div className="upload-section">
+            <div className="upload-section">
                 <input type="file" onChange={handleFileChange} className="file-input" />
-            </div> */}
+            </div>
 
                     {/* First try to uplaod the image with this uplaod button  */}
 
             <div className="buttons-container">
                 <button onClick={handleUpload} className="upload-photo-button" disabled={loading}>
-                    <FaUpload className="icon" /> {loading ? 'Processing...' : 'Upload Photo'}
+                    <FaUpload className="icon" /> {loading ? 'Processing...' : 'Convert'}
                 </button>
                 <button onClick={handleDownload} className="download-button" disabled={!coloredImage}>
                     <FaDownload className="icon" /> Download
