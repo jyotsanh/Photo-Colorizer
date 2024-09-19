@@ -16,21 +16,25 @@ import warnings
 warnings.filterwarnings("ignore", category=UserWarning, message=".*?Your .*? set is empty.*?")
 
 class Converter():
-    def __init__(self,model_name):
+    def __init__(self,model_name,render_factor):
         self.model_name = model_name
+        self.render_factor = render_factor
         pass
     def convert(self,b_w_image_path='./test_images/rose.jpg',url=''):
         colorizer = get_image_colorizer(model_name=self.model_name,artistic=True)
-        render_factor = 35  #@param {type: "slider", min: 7, max: 40}
+        render_factor = self.render_factor  #@param {type: "slider", min: 7, max: 40}
         watermarked = True #@param {type:"boolean"}
         
         image_path = colorizer.plot_transformed_image_from_url(
             url = url,
             path=b_w_image_path,
-            render_factor=render_factor, 
+            render_factor=self.render_factor, 
             compare=True, 
             watermarked=watermarked
             )
+        print(self.render_factor)
+        print(self.model_name)
+        print("path is ready bruhhh")
         print(image_path)
         return image_path
         

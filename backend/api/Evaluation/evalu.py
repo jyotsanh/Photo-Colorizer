@@ -18,9 +18,9 @@ def calculate_metrics(img_true, img_pred):
     return mse_value, psnr_value, ssim_value
 
 # Define the folders
-original_folder = 'G:\\Photo-Colorizer\\backend\\api\\Evaluation\\Original Image'
-finetune_folder = 'G:\\Photo-Colorizer\\backend\\api\\Evaluation\\FineTune\\try2'
-pretrained_folder = 'G:\\Photo-Colorizer\\backend\\api\\Evaluation\\PreTrained\\try1'
+original_folder = 'G:\\Photo-Colorizer\\backend\\api\\Evaluation\\Original Image\\res'
+finetune_folder = 'G:\\Photo-Colorizer\\backend\\api\\Evaluation\\FineTune\\res'
+pretrained_folder = 'G:\\Photo-Colorizer\\backend\\api\\Evaluation\\PreTrained\\try1\\res'
 
 # Initialize lists to store metrics
 mse_finetune, psnr_finetune, ssim_finetune = [], [], []
