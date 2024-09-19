@@ -13,25 +13,16 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formdata = { email, password };
-        setErrors('');
-        setSuccessMessage('');
-
+        const formData = { email, password };
         try {
-            console.log(formdata);
-            const response = await loginUser(formdata);
-            const { errors } = response;
-            if (errors) {
-                const { non_field_errors } = errors;
+            const response = await loginUser(formData);
+            if (response.errors) {
+                const { non_field_errors } = response.errors;
                 setErrors({ msg: non_field_errors });
             } else {
-                console.log("response : ", response);
                 const { msg, token } = response;
-
                 if (token) {
                     const { access, refresh } = token;
-                    Cookies.remove('accessToken');
-                    Cookies.remove('refreshToken');
                     Cookies.set('accessToken', access);
                     Cookies.set('refreshToken', refresh);
                     setSuccessMessage(msg);
@@ -39,7 +30,8 @@ function Login() {
                 }
             }
         } catch (error) {
-            console.log(`error: ${error}`);
+            console.error(`Login error: ${error}`);
+            setErrors({ msg: 'Failed to login. Please try again.' });
         }
     }
 
@@ -48,7 +40,7 @@ function Login() {
             <form className="log-form" onSubmit={handleSubmit}>
                 <h1>Log In</h1>
                 <div className="log-input-group">
-                    <i className="fas fa-envelope log-icon"></i>
+                    {/* <i className="fas fa-envelope log-icon"></i> */}
                     <input 
                         type="email" 
                         name="email" 
@@ -57,9 +49,8 @@ function Login() {
                         className="log-input"
                     />
                 </div>
-
                 <div className="log-input-group">
-                    <i className="fas fa-lock log-icon"></i>
+                    {/* <i className="fas fa-lock log-icon"></i> */}
                     <input 
                         type="password" 
                         name="password" 
@@ -68,7 +59,6 @@ function Login() {
                         className="log-input"
                     />
                 </div>
-
                 <button type="submit" className="log-button">Login</button>
                 <a className="log-link-text" href='/register'>Register</a>
                 <br />

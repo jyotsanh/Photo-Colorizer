@@ -2,7 +2,7 @@ import "./home.css";
 import React, { useState } from 'react';
 import axios from 'axios';
 import { FaUpload, FaDownload } from 'react-icons/fa';
-import image from '../../assets/image.png'
+import image from '../../assets/images.png'
 function Home() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [originalImage, setOriginalImage] = useState(null);

@@ -1,7 +1,7 @@
 import React from "react"
 import { useNavigate } from 'react-router-dom'
 import "./navbar.css"
-import Temple from '../../assets/Temple.png'
+import Temple from '../../assets/loog.png'
 function NavBar(){
     const navigate = useNavigate();
     return (
@@ -14,11 +14,11 @@ function NavBar(){
                 <div className="links-container">
                     <p onClick={() => navigate("/")}> Home</p>
                     <p onClick={() => navigate("/about")}> About Us</p>
-                    <p onClick={() => navigate("/upload")}> Upload</p>
+                    {/* <p onClick={() => navigate("/upload")}> Upload</p> */}
                     <p onClick={() => navigate("/register")}> Sign Up</p>
                     <p onClick={() => navigate("/login")}> Log-In</p>
-                    <p onClick={() => navigate("/profile")}>profile</p>
-                    <p onClick={() => navigate("/logout")}>Logout</p>
+                    {/* <p onClick={() => navigate("/profile")}>profile</p>
+                    <p onClick={() => navigate("/logout")}>Logout</p> */}
                     
                 </div>
             </div>
