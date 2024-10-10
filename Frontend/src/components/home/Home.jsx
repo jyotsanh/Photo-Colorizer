@@ -54,7 +54,7 @@ function Home() {
     const handleDownload = () => {
         if (artisticImage) {
             const link = document.createElement('a');
-            link.href = artisticImage;
+            link.href = fineTunedImage;
             link.download = 'colored-image.jpg';
             link.click();
         }
