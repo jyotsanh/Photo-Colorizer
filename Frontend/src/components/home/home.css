@@ -1,7 +1,7 @@
 .container {
     text-align: center;
     font-family: 'Anek Bangla', sans-serif;
-    /* border: 1px solid #000; */
+    /* border: 1px solid #000 */
     max-width: 1200px; /* Added max width for better layout */
     margin: 0 auto; /* Center the container */
     padding: 20px; /* Added padding for inner spacing */
@@ -11,7 +11,7 @@
 
 .header {
     margin: 20px 0;
-    color: #B89029;
+    color: #F8A340;
     font-size: 36px; /* Increased font size */
     font-weight: bold; /* Made it bold */
 }
