@@ -1,101 +1,52 @@
-/* register.css */
+.form {
+    --input-focus: #adadad;
+    --font-color: #000000;
+    --font-color-sub: #e1e1e1;
+    --bg-color: #F8A340;
+    --main-color: #000000;
+    padding: 20px;
+    background: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 50%; /* Increased the width of the form container */
+    gap: 20px;
+    margin-top: 170px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 170px;
+    border-radius: 5px;
+    border: 2px solid var(--main-color);
+    box-shadow: 4px 4px var(--main-color);
+}
 
-.regi-container {
+.button-group {
+    display: flex;
+    justify-content: space-between; /* Aligns buttons horizontally */
+    width: 100%; /* Ensures buttons take full width */
+    gap: 10px; /* Adds space between buttons */
+    margin-top: 20px;
+}
+
+.button-confirm, .button-signup {
+    width: 48%; /* Adjusts button width to fit in the row */
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid var(--main-color);
+    background-color: var(--bg-color);
+    box-shadow: 4px 4px var(--main-color);
+    font-size: 17px;
+    font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    margin-top: 20px;
-    background-image: url('../../assets/image.png'); /* Adjust path as needed */
-    background-size: cover;
-    background-position: center;
-    position: relative;
-}
-
-/* Creates a light overlay for text readability */
-.regi-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(232, 231, 231, 0.05); 
-    z-index: 0;
-}
-
-
-.regi-form {
-    /* background: #fff; */
-    background: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
-    padding: 20px 40px;
-    border-radius: 12px;
-    border: none;
-    width: 300px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    position: relative;
-    z-index: 1; /* Above the overlay */
-    text-align: center;
-}
-
-.regi-input-group {
-    display: flex;
-    align-items: center;
-    margin: 0.5rem 0;
-}
-
-.regi-icon {
-    margin-right: 0.5rem;
-    color: #000;
-}
-
-.regi-input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-.regi-button {
-    width: 100%;
-    padding: 0.75rem;
-    margin: 1rem 0;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
+    color: var(--font-color);
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.regi-button:hover {
-    background-color: #0056b3;
-}
-
-.regi-error-text, .regi-success-text {
-    font-size: 0.875rem;
-    margin: 0.5rem 0;
-}
-
-.regi-error-text {
-    color: #d9534f;
-}
-
-.regi-success-text {
-    color: #5cb85c;
-}
-
-.regi-link-text {
-    display: block;
-    text-align: center;
-    color: #007BFF;
-    margin-top: 1rem;
     text-decoration: none;
-    font-size: 0.875rem;
 }
 
-.regi-link-text:hover {
-    text-decoration: underline;
+.button-confirm:active, .button-signup:active {
+    box-shadow: 0px 0px var(--main-color);
+    transform: translate(3px, 3px);
 }

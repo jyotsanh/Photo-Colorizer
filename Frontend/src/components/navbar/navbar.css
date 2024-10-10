@@ -1,176 +1,34 @@
-* {
-    padding: 0;
-    margin: 0;
-}
 
-h1 {
-    font-size: 60px;
-    font-weight: bold;
-}
-
-h2 {
-    font-size: 42px;
-    font-weight: bold;
-}
-
-h3 {
-    font-size: 32px;
-    font-weight: bold;
-}
-
-button {
-    background-color: white;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border-radius: 10px;
-}
-
-a {}
 
 .navbar {
-    padding-left: 150px;
-    padding-right: 150px;
-    height: 60px;
+    height: 70px;
     background-color: rgb(255, 255, 255);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
+    padding: 0 50px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.navbar .logo-container  img{
+.logo-container img {
     width: 150px;
-    margin-top: 15px;
 }
 
-
-.navbar .links-container {
-    width: 100%;
-    padding-left: 100px;
-    padding-right: 100px;
+.links-container {
     display: flex;
+    gap: 40px; /* Increased space between links */
+}
+
+.links-container p {
     cursor: pointer;
-    justify-content: space-between;
-}
-
-.navbar .button-container {
-    width: 200px;
-}
-
-.homepage-component {
-    width: 100%;
-    padding-left: 150px;
-    padding-right: 150px;
-    display: flex;
-    gap: 50px;
-
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.homepage-component div {
-    width: 100%;
-    height: 300px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-#lhs {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-#lhs a {
-    width: 100%;
-    color: purple;
-    text-align: start;
-}
-
-#lhs a:hover {
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-#rhs {
-    padding-top: 100px;
-    padding-bottom: 100px;
-    width: 100%;
-    height: 100%;
-}
-
-.img-container {
-    width: 50px;
-    height: 50px;
-}
-
-.img-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.container {
-    padding: 20px;
-    background-color: white;
-    text-align: center;
-}
-
-.container h3 {
-    font-size: 32px;
+    font-family: 'Arial', sans-serif; /* Change to your desired font */
     font-weight: bold;
-    margin-bottom: 20px;
+    font-size: 18px; /* Increased font size */
+    color: #333; /* Darker color for contrast */
+    transition: color 0.3s, transform 0.3s;
 }
 
-.scholarship {
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
-}
-
-.scholarship-cont {
-    /* background-color:#8a2be2; */
-    color: #000000;
-    border-radius: 10px;
-    padding: 10px;
-    border: 2px solid #8a2be2;
-    height: 250px;
-    width: 250px;
-    
-}
-.pics{
-    height: 100%;
-    width: 100%;
-}
-.pics img{
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-    opacity: 0.5;
-}
-h4 {
-    font-size: 20px;
-    font-weight: bold;
-    position: relative;
-    bottom: 130px;
-
-}
-
-.scholarship-card p {
-    margin: 5px 0;
-}
-
-.read-more {
-    margin-top: 20px;
-    color: rgb(98, 30, 98);
-    font-weight: bold;
-}
-
-.read-more:hover {
-    text-decoration: underline;
-    cursor: pointer;
+.links-container p:hover {
+    color: #8a2be2; /* Change to your desired hover color */
+    transform: translateY(-2px); /* Slightly lift the link on hover */
 }

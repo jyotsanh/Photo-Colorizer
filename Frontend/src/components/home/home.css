@@ -1,44 +1,53 @@
 .container {
     text-align: center;
-    font-family: 'Anek Bangla' ;
-    border: 1px solid #000000;
+    font-family: 'Anek Bangla', sans-serif;
+    /* border: 1px solid #000; */
+    max-width: 1200px; /* Added max width for better layout */
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Added padding for inner spacing */
+    background-color: #f9f9f9; /* Light background for contrast */
+    border-radius: 10px; /* Rounded corners */
 }
 
 .header {
     margin: 20px 0;
-    color: #B89029; 
-    font-family: 'Anek Bangla' ;
-  
+    color: #B89029;
+    font-size: 36px; /* Increased font size */
+    font-weight: bold; /* Made it bold */
 }
 
 .image-section {
-    margin: 20px 0;
-    /* margin-top: 30x; */
+    margin: 30px 0; /* Increased margin */
     display: flex;
     justify-content: center;
+    gap: 20px; /* Space between image parts */
 }
 
 .image-parts {
     display: flex;
     justify-content: space-around;
-    width: 80%;
-    font-family: 'Anek Bangla' ;
-
+    width: 100%; /* Changed width to 100% */
 }
 
 .image-part {
     margin: 0 10px;
+    border: 1px solid #ddd; /* Added border for definition */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px; /* Inner padding */
+    background-color: #fff; /* White background for contrast */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .image {
-    max-width: 600px;
-    max-height: 600px;
+    max-width: 100%; /* Ensure responsiveness */
+    max-height: 400px; /* Set a max height */
     margin-top: 10px;
-    border: 1px solid #ccc;
+    border-radius: 5px; /* Rounded corners */
 }
 
 .loading-message {
     color: #8b4513;
+    font-weight: bold; /* Made it bold for visibility */
 }
 
 .upload-section {
@@ -53,7 +62,7 @@
     margin: 20px 0;
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 20px; /* Increased gap between buttons */
 }
 
 .upload-photo-button,
@@ -61,12 +70,19 @@
     background-color: #228b22;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 15px 25px; /* Increased padding for buttons */
     border-radius: 5px;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 10px;
+    font-size: 16px; /* Larger font size */
+    transition: background-color 0.3s; /* Transition effect */
+}
+
+.upload-photo-button:hover,
+.download-button:hover {
+    background-color: #1a6f1a; /* Darker shade on hover */
 }
 
 .upload-photo-button:disabled,
@@ -77,29 +93,33 @@
 
 .heritage-section {
     margin-top: 50px;
-    width: 900px;
     color: #B89029;
     text-align: center;
     align-items: center;
-    margin-left: 250px;
-    font-family: 'Anek Bangla';
-    border: 1px solid #000000;
+    margin-left: auto; /* Centering */
+    margin-right: auto; /* Centering */
+    border: 1px solid #000;
+    padding: 20px; /* Added padding */
+    border-radius: 10px; /* Rounded corners */
+    background-color: #fff; /* White background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .heritage-content {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 30px; /* Increased gap between image and description */
 }
 
 .heritage-image {
     max-width: 300px;
-     margin-right: 30px;
-    margin-top: 30px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .heritage-description {
     max-width: 400px;
     text-align: left;
-    color: 686868;
+    color: #686868;
 }
