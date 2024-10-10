@@ -4,6 +4,7 @@ import NavBar from "./components/navbar/navbar.jsx";
 import Footer from "./components/footer/footer.jsx";
 
 
+
 function App(){
   return (
     <>
