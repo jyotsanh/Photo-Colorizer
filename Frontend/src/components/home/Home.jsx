@@ -6,9 +6,7 @@ import image from '../../assets/images.png'
 function Home() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [originalImage, setOriginalImage] = useState(null);
-    
-    const [artisticImage, setArtisticImage] = useState(null);
-    const [fineTunedImage, setFineTunedImage] = useState(null);
+    const [coloredImage, setColoredImage] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -32,17 +30,15 @@ function Home() {
             const response = await axios.post('http://localhost:8000/api/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                }
+                },
+                responseType: 'blob'
             });
 
-           // Extract Base64 strings from the response data
-            const { artistic_image_base64, fine_tuned_image_base64 } = response.data;
+            const coloredImageBlob = new Blob([response.data], { type: 'image/jpeg' });
+            const coloredImageUrl = URL.createObjectURL(coloredImageBlob);
 
-            // Set the Base64 strings as image sources
             setOriginalImage(URL.createObjectURL(selectedFile));
-            setArtisticImage(artistic_image_base64);  // Use the Base64 directly in the `src`
-            setFineTunedImage(fine_tuned_image_base64);  // Use the Base64 directly in the `src`
-            
+            setColoredImage(coloredImageUrl);
         } catch (error) {
             console.error('Error uploading image:', error);
             setError(error.message);
@@ -52,9 +48,9 @@ function Home() {
     };
 
     const handleDownload = () => {
-        if (artisticImage) {
+        if (coloredImage) {
             const link = document.createElement('a');
-            link.href = fineTunedImage;
+            link.href = coloredImage;
             link.download = 'colored-image.jpg';
             link.click();
         }
@@ -73,14 +69,9 @@ function Home() {
                         {originalImage && <img src={originalImage} alt="Original" className="image" />}
                     </div>
                     <div className="image-part">
-                        <h3>Pre-Trained Colored Image</h3>
+                        <h3>Colored Image</h3>
                         {loading && <p className="loading-message">Processing image, please wait...</p>}
-                        {artisticImage && !loading && <img src={artisticImage} alt="Colored" className="image" />}
-                    </div>
-                    <div className="image-part">
-                        <h3>Fine-Tuned Colored Image</h3>
-                        {loading && <p className="loading-message">Processing image, please wait...</p>}
-                        {fineTunedImage && !loading && <img src={fineTunedImage} alt="Colored" className="image" />}
+                        {coloredImage && !loading && <img src={coloredImage} alt="Colored" className="image" />}
                     </div>
                 </div>
             </div>
@@ -98,7 +89,7 @@ function Home() {
                 <button onClick={handleUpload} className="upload-photo-button" disabled={loading}>
                     <FaUpload className="icon" /> {loading ? 'Processing...' : 'Convert'}
                 </button>
-                <button onClick={handleDownload} className="download-button" disabled={!artisticImage}>
+                <button onClick={handleDownload} className="download-button" disabled={!coloredImage}>
                     <FaDownload className="icon" /> Download
                 </button>
             </div>
@@ -116,5 +107,4 @@ function Home() {
         </div>
     );
 }
-
 export default Home;
