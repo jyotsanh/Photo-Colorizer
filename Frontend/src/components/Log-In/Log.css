@@ -1,50 +1,96 @@
+/* Reset default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Container holding the form with background image */
+.log-container {
+  position: relative; /* Establish a containing block for pseudo-element */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Align form to the right */
+  height: 100vh; /* Full viewport height */
+  width: 100%;
+  overflow: hidden; /* Prevent overflow */
+  margin-top: 10px;
+}
+
+/* Pseudo-element for background image with low opacity */
+.log-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../../assets/ba.jpg'); /* Use the correct path */
+  background-size:contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.5; /* Adjust opacity as needed */
+  z-index: -1; /* Ensure it's behind the content */
+}
+
+/* Logo Styling */
+.logo {
+  position: absolute;
+  top: 20px; /* Adjust as needed */
+  left: 20px; /* Adjust as needed */
+  width: 150px; /* Adjust size as needed */
+  z-index: 2; /* Ensure it's above the background */
+}
+
+/* Form Styling */
 .form {
   --input-focus: #adadad;
-  --font-color: #000000;
+  --font-color: #ffffff; /* Changed to white for better contrast */
   --font-color-sub: #e1e1e1;
-  --bg-color: #F8A340;
-  --main-color: #000000;
-  padding: 20px;
+  --bg-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+  --main-color: #ffffff; /* Changed to white for better contrast */
+  padding: 30px;
   background: var(--bg-color);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  width: 15%;
+  width: 350px; /* Adjust as needed */
   gap: 20px;
-  margin-top: 170px;
-  margin-left: 700px;
-  margin-bottom: 170px;
-  border-radius: 5px;
+  border-radius: 10px;
   border: 2px solid var(--main-color);
   box-shadow: 4px 4px var(--main-color);
+  z-index: 1; /* Ensure the form is above the background image */
 }
 
+/* Title Styling */
 .title {
   color: var(--font-color);
   font-weight: 900;
-  font-size: 20px;
-  margin-bottom: 25px;
+  font-size: 24px;
+  margin-bottom: 15px;
 }
 
 .title span {
   color: var(--font-color-sub);
   font-weight: 600;
-  font-size: 17px;
+  font-size: 18px;
 }
 
+/* Input Styling */
 .input {
-  width: 250px;
-  height: 40px;
+  width: 100%;
+  height: 45px;
   border-radius: 5px;
   border: 2px solid var(--main-color);
-  background-color: var(--bg-color);
+  background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent inputs */
   box-shadow: 4px 4px var(--main-color);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--font-color);
-  padding: 5px 10px;
+  padding: 10px;
   outline: none;
+  backdrop-filter: blur(5px); /* Optional: Blur effect */
 }
 
 .input::placeholder {
@@ -56,24 +102,27 @@
   border: 2px solid var(--input-focus);
 }
 
+/* Social Login Buttons */
 .login-with {
   display: flex;
-  gap: 20px;
+  gap: 15px;
+  margin-top: 10px;
 }
 
 .button-log {
   cursor: pointer;
-  width: 40px;
-  height: 40px;
-  border-radius: 100%;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
   border: 2px solid var(--main-color);
   background-color: var(--bg-color);
   box-shadow: 4px 4px var(--main-color);
   color: var(--font-color);
-  font-size: 25px;
+  font-size: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: transform 0.1s, box-shadow 0.1s;
 }
 
 .icon {
@@ -82,21 +131,24 @@
   fill: var(--main-color);
 }
 
-.button-log:active, .button-confirm:active {
+.button-log:active,
+.button-confirm:active {
   box-shadow: 0px 0px var(--main-color);
   transform: translate(3px, 3px);
 }
 
+/* Submit Button and Sign Up Link */
 .button-container {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  margin-top: 20px;
 }
 
-.button-confirm, .button-signup {
-  margin: 50px auto 0 auto;
-  width: 120px;
-  height: 40px;
+.button-confirm,
+.button-signup {
+  width: 48%;
+  height: 45px;
   border-radius: 5px;
   border: 2px solid var(--main-color);
   background-color: var(--bg-color);
@@ -109,9 +161,39 @@
   color: var(--font-color);
   cursor: pointer;
   text-decoration: none;
+  transition: transform 0.1s, box-shadow 0.1s;
 }
 
-.button-confirm:active, .button-signup:active {
+.button-confirm:active,
+.button-signup:active {
   box-shadow: 0px 0px var(--main-color);
   transform: translate(3px, 3px);
+}
+
+/* Error and Success Messages Styling */
+.log-error-text {
+  color: #ff4d4d;
+  font-weight: 600;
+}
+
+.log-success-text {
+  color: #4BB543;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .form {
+      width: 90%;
+      max-width: 400px;
+  }
+  .log-container {
+      justify-content: center; /* Center form on smaller screens */
+  }
+  .logo {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+  }
 }
