@@ -2,11 +2,14 @@ import "./home.css";
 import React, { useState } from 'react';
 import axios from 'axios';
 import { FaUpload, FaDownload } from 'react-icons/fa';
-import image from '../../assets/images.png'
+import image from '../../assets/images.png';
+
 function Home() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [originalImage, setOriginalImage] = useState(null);
-    const [coloredImage, setColoredImage] = useState(null);
+    
+    const [artisticImage, setArtisticImage] = useState(null);
+    const [fineTunedImage, setFineTunedImage] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -30,15 +33,17 @@ function Home() {
             const response = await axios.post('http://localhost:8000/api/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                },
-                responseType: 'blob'
+                }
             });
 
-            const coloredImageBlob = new Blob([response.data], { type: 'image/jpeg' });
-            const coloredImageUrl = URL.createObjectURL(coloredImageBlob);
+           // Extract Base64 strings from the response data
+            const { artistic_image_base64, fine_tuned_image_base64 } = response.data;
 
+            // Set the Base64 strings as image sources
             setOriginalImage(URL.createObjectURL(selectedFile));
-            setColoredImage(coloredImageUrl);
+            setArtisticImage(artistic_image_base64);  // Use the Base64 directly in the `src`
+            setFineTunedImage(fine_tuned_image_base64);  // Use the Base64 directly in the `src`
+            
         } catch (error) {
             console.error('Error uploading image:', error);
             setError(error.message);
@@ -48,63 +53,72 @@ function Home() {
     };
 
     const handleDownload = () => {
-        if (coloredImage) {
+        if (fineTunedImage) { // Corrected condition to check fineTunedImage
             const link = document.createElement('a');
-            link.href = coloredImage;
+            link.href = fineTunedImage;
             link.download = 'colored-image.jpg';
             link.click();
         }
     };
 
     return (
-        <div className="container">
-            <header className="header">
+        <div className="home-container">
+            <header className="home-header">
                 <h1>Welcome to Temple Vision</h1>
             </header>
 
-            <div className="image-section">
-                <div className="image-parts">
-                    <div className="image-part">
+            <div className="home-image-section">
+                <div className="home-image-parts">
+                    <div className="home-image-part">
                         <h3>Uploaded Image</h3>
-                        {originalImage && <img src={originalImage} alt="Original" className="image" />}
+                        {originalImage && <img src={originalImage} alt="Original" className="home-image" />}
                     </div>
-                    <div className="image-part">
-                        <h3>Colored Image</h3>
-                        {loading && <p className="loading-message">Processing image, please wait...</p>}
-                        {coloredImage && !loading && <img src={coloredImage} alt="Colored" className="image" />}
+                    <div className="home-image-part">
+                        <h3>Pre-Trained Colored Image</h3>
+                        {loading && <p className="home-loading-message">Processing image, please wait...</p>}
+                        {artisticImage && !loading && <img src={artisticImage} alt="Colored" className="home-image" />}
+                    </div>
+                    <div className="home-image-part">
+                        <h3>Fine-Tuned Colored Image</h3>
+                        {loading && <p className="home-loading-message">Processing image, please wait...</p>}
+                        {fineTunedImage && !loading && <img src={fineTunedImage} alt="Colored" className="home-image" />}
                     </div>
                 </div>
             </div>
 
-
-            {/* If u cannot uplaod from that then onlu uncomment this one */}
+            {/* If you cannot upload from that then only uncomment this one */}
             
-            <div className="upload-section">
-                <input type="file" onChange={handleFileChange} className="file-input" />
+            <div className="home-upload-section">
+                <input type="file" onChange={handleFileChange} className="home-file-input" />
             </div>
 
-                    {/* First try to uplaod the image with this uplaod button  */}
+            {/* First try to upload the image with this upload button */}
 
-            <div className="buttons-container">
-                <button onClick={handleUpload} className="upload-photo-button" disabled={loading}>
-                    <FaUpload className="icon" /> {loading ? 'Processing...' : 'Convert'}
+            <div className="home-buttons-container">
+                <button onClick={handleUpload} className="home-upload-photo-button" disabled={loading}>
+                    <FaUpload className="home-icon" /> {loading ? 'Processing...' : 'Convert'}
                 </button>
-                <button onClick={handleDownload} className="download-button" disabled={!coloredImage}>
-                    <FaDownload className="icon" /> Download
+                <button onClick={handleDownload} className="home-download-button" disabled={!fineTunedImage}>
+                    <FaDownload className="home-icon" /> Download
                 </button>
             </div>
 
-            <div className="heritage-section">
+            <div className="home-heritage-section">
                 <h2>See Our Heritage in its Glories Form By Coloring the Past History</h2>
-                <div className="heritage-content">
-                    <img src={image} alt="Heritage" className="heritage-image" />
-                    <div className="heritage-description">
+                <div className="home-heritage-content">
+                    <img src={image} alt="Heritage" className="home-heritage-image" />
+                    <div className="home-heritage-description">
                         <h3>Change the Image of the History Full of Color.</h3>
-                        <p>We change the black and white image into a color image using AI deoldify.</p>
+                        <p>
+                            At Temple Vision, we breathe life into historical black-and-white images by restoring them with vibrant colors using advanced AI technology called DeOldify. 
+                            This cutting-edge deep learning model is designed to intelligently predict and apply realistic colors to grayscale photos, transforming them into rich, full-color images that resemble how they might have originally appeared. 
+                            Whether it's an old family photo, a historical landmark, or a forgotten moment in time, our AI meticulously analyzes the image and reimagines it with lifelike hues, giving users a stunning, colorized version of the past.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     );
 }
+
 export default Home;
