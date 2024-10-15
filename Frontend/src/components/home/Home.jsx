@@ -109,7 +109,7 @@ function Home() {
                     <img src={image} alt="Heritage" className="heritage-image" />
                     <div className="heritage-description">
                         <h3>Change the Image of the History Full of Color.</h3>
-                        <p>We change the black and white image into a color image using AI deoldify.</p>
+                        <p>At Temple Vision, we breathe life into historical black-and-white images by restoring them with vibrant colors using advanced AI technology called DeOldify. This cutting-edge deep learning model is designed to intelligently predict and apply realistic colors to grayscale photos, transforming them into rich, full-color images that resemble how they might have originally appeared. Whether it's an old family photo, a historical landmark, or a forgotten moment in time, our AI meticulously analyzes the image and reimagines it with lifelike hues, giving users a stunning, colorized version of the past.</p>
                     </div>
                 </div>
             </div>
