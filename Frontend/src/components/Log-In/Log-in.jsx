@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import './Log.css';
 import backgroundImage from '../../assets/ba.jpg'; // Import the background image
-import logo from '../../assets/logo.png'; // Import your logo
+
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -55,8 +55,7 @@ function Login() {
 
     return (
         <div className="log-container">
-            {/* Logo */}
-            <img src={logo} alt="Logo" className="logo" />
+            
 
             <form className="form log-form" onSubmit={handleSubmit}>
                 <div className="title">
