@@ -26,18 +26,18 @@
 /* Image Section Styling */
 .image-section {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
     gap: 30px;
     margin-bottom: 40px;
 }
 
-.image-parts {
+.image-row {
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 20px;
+    justify-content: center;
+    gap: 30px;
     width: 100%;
+    margin-bottom: 20px;
 }
 
 .image-part {
@@ -45,7 +45,7 @@
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    width: 300px;
+    width: 350px;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -146,21 +146,21 @@
 
 .heritage-content {
     display: flex;
-    flex-direction: row; /* Ensure items are in a row */
+    flex-direction: row;
     align-items: center;
     gap: 30px;
-    justify-content: center; /* Center the content horizontally */
+    justify-content: center;
 }
 
 .heritage-image {
-    max-width: 50%; /* Allocate 50% width to the image */
+    max-width: 50%;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .heritage-description {
-    max-width: 50%; /* Allocate 50% width to the text */
+    max-width: 50%;
     text-align: left;
 }
 
@@ -179,16 +179,16 @@
 /* Responsive Design Enhancements */
 @media (max-width: 992px) {
     .heritage-content {
-        flex-direction: column; /* Stack items vertically on medium screens */
+        flex-direction: column;
     }
 
     .heritage-image,
     .heritage-description {
-        max-width: 100%; /* Full width for both image and text */
+        max-width: 100%;
     }
 
     .image-part {
-        width: 100%; /* Full width for image parts on smaller screens */
+        width: 100%;
     }
 }
 

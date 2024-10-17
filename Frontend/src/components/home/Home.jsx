@@ -1,12 +1,12 @@
-import "./home.css";
+import './home.css';
 import React, { useState } from 'react';
 import axios from 'axios';
 import { FaUpload, FaDownload } from 'react-icons/fa';
-import image from '../../assets/images.png'
+import image from '../../assets/images.png';
+
 function Home() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [originalImage, setOriginalImage] = useState(null);
-    
     const [artisticImage, setArtisticImage] = useState(null);
     const [fineTunedImage, setFineTunedImage] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -35,14 +35,14 @@ function Home() {
                 }
             });
 
-           // Extract Base64 strings from the response data
+            // Extract Base64 strings from the response data
             const { artistic_image_base64, fine_tuned_image_base64 } = response.data;
 
             // Set the Base64 strings as image sources
             setOriginalImage(URL.createObjectURL(selectedFile));
-            setArtisticImage(artistic_image_base64);  // Use the Base64 directly in the `src`
-            setFineTunedImage(fine_tuned_image_base64);  // Use the Base64 directly in the `src`
-            
+            setArtisticImage(artistic_image_base64); // Use the Base64 directly in the `src`
+            setFineTunedImage(fine_tuned_image_base64); // Use the Base64 directly in the `src`
+
         } catch (error) {
             console.error('Error uploading image:', error);
             setError(error.message);
@@ -52,7 +52,7 @@ function Home() {
     };
 
     const handleDownload = () => {
-        if (artisticImage) {
+        if (fineTunedImage) {
             const link = document.createElement('a');
             link.href = fineTunedImage;
             link.download = 'colored-image.jpg';
@@ -67,7 +67,8 @@ function Home() {
             </header>
 
             <div className="image-section">
-                <div className="image-parts">
+                {/* Row with Uploaded and Pre-Trained Image */}
+                <div className="image-row">
                     <div className="image-part">
                         <h3>Uploaded Image</h3>
                         {originalImage && <img src={originalImage} alt="Original" className="image" />}
@@ -77,42 +78,44 @@ function Home() {
                         {loading && <p className="loading-message">Processing image, please wait...</p>}
                         {artisticImage && !loading && <img src={artisticImage} alt="Colored" className="image" />}
                     </div>
-                    <div className="image-part">
-                        <h3>Fine-Tuned Colored Image</h3>
-                        {loading && <p className="loading-message">Processing image, please wait...</p>}
-                        {fineTunedImage && !loading && <img src={fineTunedImage} alt="Colored" className="image" />}
-                    </div>
+                </div>
+                {/* Centered Fine-Tuned Image */}
+                <div className="image-part">
+                    <h3>Fine-Tuned Colored Image</h3>
+                    {loading && <p className="loading-message">Processing image, please wait...</p>}
+                    {fineTunedImage && !loading && <img src={fineTunedImage} alt="Fine-Tuned Colored" className="image" />}
                 </div>
             </div>
 
-
-            {/* If u cannot uplaod from that then onlu uncomment this one */}
-            
             <div className="upload-section">
                 <input type="file" onChange={handleFileChange} className="file-input" />
             </div>
 
-                    {/* First try to uplaod the image with this uplaod button  */}
-
             <div className="buttons-container">
                 <button onClick={handleUpload} className="upload-photo-button" disabled={loading}>
-                    <FaUpload className="icon" /> {loading ? 'Processing...' : 'Convert'}
+                    <FaUpload />
+                    Upload Photo
                 </button>
-                <button onClick={handleDownload} className="download-button" disabled={!artisticImage}>
-                    <FaDownload className="icon" /> Download
+                <button onClick={handleDownload} className="download-button" disabled={!fineTunedImage}>
+                    <FaDownload />
+                    Download Image
                 </button>
             </div>
 
-            <div className="heritage-section">
-                <h2>See Our Heritage in its Glories Form By Coloring the Past History</h2>
+            <section className="heritage-section">
+                <h2>Temple Heritage</h2>
                 <div className="heritage-content">
-                    <img src={image} alt="Heritage" className="heritage-image" />
+                    <img src={image} alt="Temple" className="heritage-image" />
                     <div className="heritage-description">
-                        <h3>Change the Image of the History Full of Color.</h3>
-                        <p>At Temple Vision, we breathe life into historical black-and-white images by restoring them with vibrant colors using advanced AI technology called DeOldify. This cutting-edge deep learning model is designed to intelligently predict and apply realistic colors to grayscale photos, transforming them into rich, full-color images that resemble how they might have originally appeared. Whether it's an old family photo, a historical landmark, or a forgotten moment in time, our AI meticulously analyzes the image and reimagines it with lifelike hues, giving users a stunning, colorized version of the past.</p>
+                        <h3>The Legacy of Ancient Architecture</h3>
+                        <p>
+                            Experience the grandeur and spiritual serenity of ancient temple architecture that has 
+                            stood the test of time. These structures are not just places of worship but are 
+                            masterpieces that showcase the dedication and artistry of our ancestors.
+                        </p>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
     );
 }
