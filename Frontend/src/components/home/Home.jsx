@@ -13,7 +13,8 @@ function Home() {
     const [error, setError] = useState(null);
 
     const handleFileChange = (event) => {
-        setSelectedFile(event.target.files[0]);
+        const file = event.target.files[0];
+        setSelectedFile(file);
     };
 
     const handleUpload = async () => {
@@ -40,8 +41,8 @@ function Home() {
 
             // Set the Base64 strings as image sources
             setOriginalImage(URL.createObjectURL(selectedFile));
-            setArtisticImage(artistic_image_base64); // Use the Base64 directly in the `src`
-            setFineTunedImage(fine_tuned_image_base64); // Use the Base64 directly in the `src`
+            setArtisticImage(artistic_image_base64);
+            setFineTunedImage(fine_tuned_image_base64);
 
         } catch (error) {
             console.error('Error uploading image:', error);
@@ -88,19 +89,37 @@ function Home() {
             </div>
 
             <div className="upload-section">
-                <input type="file" onChange={handleFileChange} className="file-input" />
+                <input 
+                    type="file" 
+                    onChange={handleFileChange} 
+                    className="file-input" 
+                />
             </div>
 
-            <div className="buttons-container">
-                <button onClick={handleUpload} className="upload-photo-button" disabled={loading}>
-                    <FaUpload />
-                    Upload Photo
-                </button>
-                <button onClick={handleDownload} className="download-button" disabled={!fineTunedImage}>
-                    <FaDownload />
-                    Download Image
-                </button>
-            </div>
+            {selectedFile && (
+                <div className="buttons-container">
+                    <button 
+                        onClick={handleUpload} 
+                        className="upload-photo-button" 
+                        disabled={loading}
+                    >
+                        <FaUpload />
+                        Convert
+                    </button>
+                </div>
+            )}
+
+            {fineTunedImage && (
+                <div className="buttons-container">
+                    <button 
+                        onClick={handleDownload} 
+                        className="download-button"
+                    >
+                        <FaDownload />
+                        Download Image
+                    </button>
+                </div>
+            )}
 
             <section className="heritage-section">
                 <h2>Temple Heritage</h2>

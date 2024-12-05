@@ -28,7 +28,7 @@ function NavBar() {
             <div className={`links-container ${isOpen ? "open" : ""}`}>
                 <p onClick={() => navigate("/")}>Home</p>
                 <p onClick={() => navigate("/about")}>About Us</p>
-                <p onClick={() => navigate("/login")}>Log In</p>
+                
             </div>
         </div>
     );

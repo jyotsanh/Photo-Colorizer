@@ -140,8 +140,8 @@ class ImageUploadView(APIView):
         serializer = ImageUploadSerializer(data=request.data)
         if serializer.is_valid():
             # Initialize converters for both models
-            artistic_model = Converter(MODEL_NAME,render_factor = 20)
-            fine_tuned_model = Converter(FINE_TUNE_MODEL,render_factor=20)
+            artistic_model = Converter(MODEL_NAME,render_factor = 17)
+            fine_tuned_model = Converter(FINE_TUNE_MODEL,render_factor=17)
             
             
             
