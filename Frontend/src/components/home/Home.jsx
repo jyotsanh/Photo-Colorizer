@@ -14,7 +14,24 @@ function Home() {
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
-        setSelectedFile(file);
+        
+        // Validate file type
+        const validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/webp'];
+        
+        if (file) {
+            if (!validImageTypes.includes(file.type)) {
+                setError('Please upload a valid image file (JPEG, PNG, GIF, BMP, or WEBP)');
+                setSelectedFile(null);
+                return;
+            }
+    
+            // Clear previous images when a new file is selected
+            setSelectedFile(file);
+            setOriginalImage(null);
+            setArtisticImage(null);
+            setFineTunedImage(null);
+            setError(null);
+        }
     };
 
     const handleUpload = async () => {
@@ -104,9 +121,15 @@ function Home() {
                         disabled={loading}
                     >
                         <FaUpload />
-                        Convert
+                        Upload Photo
                     </button>
                 </div>
+            )}
+
+            {error && (
+            <div className="error-message">
+                {error}
+            </div>
             )}
 
             {fineTunedImage && (
