@@ -1,86 +1,207 @@
+/* Ensure html and body take up full height and have no margins */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
+/* Reset default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Anek Bangla', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* Container holding the form with background image */
 .log-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin-top: 20px;
-    background-image: url('../../assets/48.jpg'); /* Adjust path as needed */
-    background-size: cover;
-    background-position: center;
-    position: relative;
+  position: relative; /* Establish a containing block for pseudo-element */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Align form to the right */
+  height: 100vh; /* Full viewport height */
+  width: 100%;
+  overflow: hidden; /* Prevent overflow */
+  /* Removed margin-top: 10px; to eliminate top margin */
 }
 
-/* Creates a light overlay for text readability */
+/* Pseudo-element for background image with low opacity */
 .log-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(232, 231, 231, 0.05); 
-    z-index: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../../assets/ba.jpg'); /* Ensure the path is correct */
+  background-size: cover; /* Changed from contain to cover */
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.5; /* Adjust opacity as needed */
+  z-index: -1; /* Ensure it's behind the content */
 }
 
-
-.log-form {
-    background: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
-    padding: 20px 40px;
-    border-radius: 12px;
-    border: none;
-    width: 300px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    position: relative;
-    z-index: 1; /* Above the overlay */
-    text-align: center;
+/* Logo Styling */
+.logo {
+  position: absolute;
+  top: 20px; /* Adjust as needed */
+  left: 20px; /* Adjust as needed */
+  width: 150px; /* Adjust size as needed */
+  z-index: 2; /* Ensure it's above the background */
 }
 
-.log-input-group {
-    margin-bottom: 15px;
+/* Form Styling */
+.form {
+  --input-focus: #adadad;
+  --font-color: #ffffff; /* Changed to white for better contrast */
+  --font-color-sub: #e1e1e1;
+  --bg-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+  --main-color: #ffffff; /* Changed to white for better contrast */
+  padding: 30px;
+  background: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 350px; /* Adjust as needed */
+  gap: 20px;
+  border-radius: 10px;
+  border: 2px solid var(--main-color);
+  box-shadow: 4px 4px var(--main-color);
+  z-index: 1; /* Ensure the form is above the background image */
 }
 
-.log-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    background-color: transparent; /* Transparent background */
+/* Title Styling */
+.title {
+  color: var(--font-color);
+  font-weight: 900;
+  font-size: 24px;
+  margin-bottom: 15px;
 }
 
-.log-button {
-    width: 100%;
-    padding: 10px;
-    border-radius: 20px;
-    background-color: #007BFF; /* Primary color */
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.title span {
+  color: var(--font-color-sub);
+  font-weight: 600;
+  font-size: 18px;
 }
 
-.log-button:hover {
-    background-color: #0056b3;
+/* Input Styling */
+.input {
+  width: 100%;
+  height: 45px;
+  border-radius: 5px;
+  border: 2px solid var(--main-color);
+  background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent inputs */
+  box-shadow: 4px 4px var(--main-color);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--font-color);
+  padding: 10px;
+  outline: none;
+  backdrop-filter: blur(5px); /* Optional: Blur effect */
 }
 
-/* Additional styles for error messages and links */
-.log-error-text, .log-success-text {
-    color: #d9534f; /* Red for errors */
-    text-align: center;
-    font-size: 0.875rem;
+.input::placeholder {
+  color: var(--font-color-sub);
+  opacity: 0.8;
+}
+
+.input:focus {
+  border: 2px solid var(--input-focus);
+}
+
+/* Social Login Buttons */
+.login-with {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.button-log {
+  cursor: pointer;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 2px solid var(--main-color);
+  background-color: var(--bg-color);
+  box-shadow: 4px 4px var(--main-color);
+  color: var(--font-color);
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  fill: var(--main-color);
+}
+
+.button-log:active,
+.button-confirm:active {
+  box-shadow: 0px 0px var(--main-color);
+  transform: translate(3px, 3px);
+}
+
+/* Submit Button and Sign Up Link */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.button-confirm,
+.button-signup {
+  width: 48%;
+  height: 45px;
+  border-radius: 5px;
+  border: 2px solid var(--main-color);
+  background-color: var(--bg-color);
+  box-shadow: 4px 4px var(--main-color);
+  font-size: 17px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--font-color);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.button-confirm:active,
+.button-signup:active {
+  box-shadow: 0px 0px var(--main-color);
+  transform: translate(3px, 3px);
+}
+
+/* Error and Success Messages Styling */
+.log-error-text {
+  color: #ff4d4d;
+  font-weight: 600;
 }
 
 .log-success-text {
-    color: #5cb85c; /* Green for success messages */
+  color: #4BB543;
+  font-weight: 600;
 }
 
-.log-link-text {
-    display: block;
-    margin-top: 20px;
-    color: #007BFF;
-    text-decoration: none;
-}
-
-.log-link-text:hover {
-    text-decoration: underline;
+/* Responsive Design */
+@media (max-width: 900px) {
+  .form {
+      width: 90%;
+      max-width: 400px;
+  }
+  .log-container {
+      justify-content: center; /* Center form on smaller screens */
+  }
+  .logo {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+  }
 }
